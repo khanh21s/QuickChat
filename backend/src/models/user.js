@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
             trim: true,
             lowercase: true,
         },
-        displayNane: {
+        displayName: {
             type: String,
             required: true,
             trim: true,

@@ -86,3 +86,21 @@ export const signIn = async (req, res) => {
         res.status(500).json({message: 'loi he thong'});
     }
 }
+
+export const signOut = async (req, res) => {
+    try {
+        // lay refreshtoken tu cookie
+        const token = req.cookie?.refreshToken;
+        if(token){
+        // xoa refreshtoken trong session
+            await Session.deleteOne({refreshToken: token});
+        // xoa cookie
+            res.clearCookie('refreshToken');
+        }
+    return res.sendStatus(204);
+
+    } catch (error) {
+        console.error('loi khi dang xuat', error);
+        res.status(500).json({message: 'loi he thong'});
+    }
+}
